@@ -1,0 +1,22 @@
+<div class="pos-f-t">
+    <div [@collapseExpand]="isCollapsed ? 'collapsed' : 'expanded'" id="navbarToggleExternalContent">
+      <div class="bg-dark p-4">
+        <ul class="nav justify-content-center">
+         <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="contactMe">Contact me</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="login">login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" (click)="toggleCollapse()" aria-controls="navbarToggleExternalContent" 
+      aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </div>
+  
+  <router-outlet></router-outlet>
