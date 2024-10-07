@@ -24,7 +24,14 @@ public class UserFacadeImpl implements UserFacade {
     private PasswordEncoder passwordEncoder;
     @Override
     public User registerNewUser(User user){
-       return userRepository.save(user);
+        Role role=  commonRepository.findById("User").get();
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRole(roles);
+
+        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+        return userRepository.save(user);
     }
 
     @Override
@@ -49,15 +56,15 @@ public class UserFacadeImpl implements UserFacade {
         adminUser.setRole(adminRoles);
         userRepository.save(adminUser);
 
-        User donor = new User();
-        donor.setUserFirstName("defaultDonor");
-        donor.setUserLastName("defaultDonor");
-        donor.setUserName("donor123");
-        donor.setUserPassword(getEncodedPassword("donor@123"));
-        Set<Role> donorRoles = new HashSet<>();
-        donorRoles.add(donorRole);
-        donor.setRole(donorRoles);
-        userRepository.save(donor);
+//        User donor = new User();
+//        donor.setUserFirstName("defaultDonor");
+//        donor.setUserLastName("defaultDonor");
+//        donor.setUserName("donor123");
+//        donor.setUserPassword(getEncodedPassword("donor@123"));
+//        Set<Role> donorRoles = new HashSet<>();
+//        donorRoles.add(donorRole);
+//        donor.setRole(donorRoles);
+//        userRepository.save(donor);
     }
 
     public String getEncodedPassword(String password){
